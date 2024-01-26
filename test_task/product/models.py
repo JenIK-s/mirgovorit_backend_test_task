@@ -2,8 +2,14 @@ from django.db import models
 
 
 class Product(models.Model):
-    name = models.CharField(max_length=255, verbose_name='Название')
-    count_used = models.IntegerField(default=0, verbose_name='Количество использований в рецепте')
+    name = models.CharField(
+        max_length=255,
+        verbose_name='Название'
+    )
+    count_used = models.IntegerField(
+        default=0,
+        verbose_name='Количество использований в рецепте'
+    )
 
     class Meta:
         verbose_name = 'Продукт'
@@ -14,7 +20,10 @@ class Product(models.Model):
 
 
 class Recipe(models.Model):
-    name = models.CharField(max_length=255, verbose_name='Название')
+    name = models.CharField(
+        max_length=255,
+        verbose_name='Название'
+    )
     products = models.ManyToManyField(
         Product,
         through='ProductInRecipe',
@@ -30,9 +39,19 @@ class Recipe(models.Model):
 
 
 class ProductInRecipe(models.Model):
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, verbose_name='Рецепт')
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='Продукт')
-    weight_in_grams = models.IntegerField(verbose_name='Вес в граммах')
+    recipe = models.ForeignKey(
+        Recipe,
+        on_delete=models.CASCADE,
+        verbose_name='Рецепт'
+    )
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.CASCADE,
+        verbose_name='Продукт'
+    )
+    weight_in_grams = models.IntegerField(
+        verbose_name='Вес в граммах'
+    )
 
     class Meta:
         verbose_name = 'Продукт в рецепте'
