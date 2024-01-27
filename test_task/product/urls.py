@@ -14,7 +14,7 @@ urlpatterns = [
         name='add_product_to_recipe'
     ),
     path(
-        'cook_recipe/<int:recipe_id>/',
+        'cook_recipe/<int:recipe_id>',
         cook_recipe,
         name='cook_recipe'
     ),

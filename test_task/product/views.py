@@ -1,5 +1,6 @@
+from django.db.models import F
 from django.shortcuts import render
-from .models import ProductInRecipe
+from .models import Product, Recipe, ProductInRecipe
 from django.http import HttpResponse
 
 
@@ -20,13 +21,19 @@ def cook_recipe(_, recipe_id):
         recipe_id=recipe_id
     )
     for recipe in recipes:
-        recipe.product.count_used += 1
-        recipe.product.save()
+        Product.objects.filter(
+            id=recipe.product.id
+        ).update(
+            count_used=F('count_used') + 1
+        )
+
     return HttpResponse(status=200)
 
 
 def show_recipes_without_product(request, product_id):
-    recipes = ProductInRecipe.objects.exclude(
-        product_id=product_id, weight_in_grams__gte=10
+    recipes = Recipe.objects.exclude(
+        productinrecipe__product_id=product_id,
+        productinrecipe__weight_in_grams__gte=10
     )
-    return render(request, 'index.html', context={'recipes': recipes})
+
+    return render(request, 'index.html', {'recipes': recipes})
