@@ -1,8 +1,4 @@
 ## Тестовое задание на позицию Junior/Middle Django developer
-### Емельянов Артём
-
----
-
 ## Запуск проекта
 1. Клонирование репозитория
   - `git clone git@github.com:JenIK-s/foodgram-project-react.git`
@@ -15,3 +11,5 @@
   - `python manage.py migrate`
 6. Создание супер пользователя
   - `python manage.py createsuperuser`
+---
+## Емельянов Артём
